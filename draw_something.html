@@ -1,0 +1,72 @@
+<meta charset="UTF-8">
+<head> <!-- write the header -->
+    <title>You're an artist!</title>
+    <h1>You're an artist!</h1>
+    <h3>*Use your mouse pointer to paint.<br>
+        *Press Shit (+) or Alt (-) to change the brush size.<br>
+        *Use the right mouse button to set a color: white, blue, red or green.</h3> 
+</head>
+
+<body> <!-- here goes the canva -->
+    <canvas width="600"  height="400"></canvas>
+    <script> 
+
+        var canva = document.querySelector('canvas');
+        var brush = canva.getContext('2d');
+
+        brush.fillStyle = 'white';
+        brush.fillRect(0, 0, 600, 400);
+        brush.strokeStyle = 'black';
+        brush.strokeRect(0, 0, 600, 400);
+
+        var colors = ['white','blue','red','green'];
+        var colorNow = 0;
+
+        function setColor() { // set the brush color
+            
+            colorNow++;
+            if (colorNow >= colors.length){
+                colorNow = 0;
+            }
+            return false 
+
+        }
+            
+
+        canva.oncontextmenu=setColor; 
+
+        
+        var raio = 5;
+        var desenha = false;
+
+        canva.onmousemove = function (event){
+            if (desenha){
+                var x = event.pageX - canva.offsetLeft;
+                var y = event.pageY - canva.offsetTop;
+
+                if (event.shiftKey && raio <= 40){
+                    raio = raio+10;
+            
+                } else if (event.altKey && raio >= 5) {
+                    raio = raio-3;
+                }
+
+                brush.fillStyle = colors[colorNow];
+                brush.beginPath();
+                brush.arc(x, y, raio, 0, 2*3.14);
+                brush.fill();
+            }
+            console.log(event);
+        }
+
+        canva.onmousedown = function (){
+            desenha = true;
+        }
+
+        canva.onmouseup = function (){
+            desenha = false;
+        }
+
+
+    </script>
+</body>
