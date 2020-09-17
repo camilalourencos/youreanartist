@@ -4,7 +4,8 @@
     <h1>You're an artist!</h1>
     <h3>*Use your mouse pointer to paint.<br>
         *Press Shit (+) or Alt (-) to change the brush size.<br>
-        *Use the right mouse button to set a color: white, blue, red or green.</h3> 
+        *Choose a color <input type = 'color'></h3>
+
 </head>
 
 <body> <!-- here goes the canva -->
@@ -19,23 +20,9 @@
         brush.strokeStyle = 'black';
         brush.strokeRect(0, 0, 600, 400);
 
-        var colors = ['white','blue','red','green'];
-        var colorNow = 0;
-
-        function setColor() { // set the brush color
-            
-            colorNow++;
-            if (colorNow >= colors.length){
-                colorNow = 0;
-            }
-            return false 
-
-        }
-            
-
-        canva.oncontextmenu=setColor; 
-
         
+
+        var color = document.querySelector('input');     
         var raio = 5;
         var desenha = false;
 
@@ -51,7 +38,7 @@
                     raio = raio-3;
                 }
 
-                brush.fillStyle = colors[colorNow];
+                brush.fillStyle = color.value;
                 brush.beginPath();
                 brush.arc(x, y, raio, 0, 2*3.14);
                 brush.fill();
