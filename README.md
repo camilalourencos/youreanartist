@@ -1,2 +1,2 @@
 # youreanartist
-This code makes you a minimalist artist: you have four colours (white, green, red and blue) to make your masterpiece.
+This code makes you a minimalist artist: you now have a colour pallet to make your masterpiece.
